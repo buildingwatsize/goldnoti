@@ -1,5 +1,9 @@
 # Gold Notification Documents
 
+## Postman Collection
+
+[Goldnoti.postman_collection.json](./Goldnoti.postman_collection.json)
+
 ## Health Check
 
 HTTP Request

@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "c0dbc663-af02-4b97-9c68-f21b542bca49",
+		"name": "Goldnoti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Today Price",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:10999/api/today",
+					"host": [
+						"localhost"
+					],
+					"port": "10999",
+					"path": [
+						"api",
+						"today"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "[Example] Get Today Price",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10999/api/today",
+							"host": [
+								"localhost"
+							],
+							"port": "10999",
+							"path": [
+								"api",
+								"today"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jul 2020 04:05:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "311"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response_data\": {\n        \"bar_buy\": 26850,\n        \"bar_sell\": 26950,\n        \"ornament_buy\": 26363.24,\n        \"ornament_sell\": 27450,\n        \"status_change\": \"ทองขึ้น\",\n        \"today_change\": 50,\n        \"updated_date\": \"15 กรกฎาคม 2563\",\n        \"updated_time\": \"เวลา 09:20 น.\"\n    },\n    \"response_message\": \"\",\n    \"response_timestamp\": \"2020-07-15T11:05:07Z\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
