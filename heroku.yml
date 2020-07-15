@@ -2,3 +2,5 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    ENV: dev
