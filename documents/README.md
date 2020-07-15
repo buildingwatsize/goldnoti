@@ -1,5 +1,10 @@
 # Gold Notification Documents
 
+## Demo
+
+GET: [https://goldnoti.herokuapp.com/api/health](https://goldnoti.herokuapp.com/api/health)
+POST: [https://goldnoti.herokuapp.com/api/today](https://goldnoti.herokuapp.com/api/today)
+
 ## Postman Collection
 
 [Goldnoti.postman_collection.json](./Goldnoti.postman_collection.json)
