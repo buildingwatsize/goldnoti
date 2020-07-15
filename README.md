@@ -24,6 +24,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.1.3
+
+- Make App Supported Heroku Port Dynamically on Deployed
+
 v0.1.2
 
 - Added Dockerfile and docker-compose for build docker images
