@@ -1,0 +1,4 @@
+# Note: we don't have `run` section because Heroku uses the `CMD` specified in the `Dockerfile`
+build:
+  docker:
+    web: Dockerfile

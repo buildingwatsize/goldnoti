@@ -24,6 +24,15 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.1.2
+
+- Added Dockerfile and docker-compose for build docker images
+- Fixed Heroku Deployment (Set app stack to `container` via docker images)
+
+v0.1.1
+
+- Heroku Deployed
+
 v0.1.0
 
 - [NEW] API Check Price for Today
@@ -57,6 +66,16 @@ v0.1.0
 
     # Test Mode
     go test ./... -v
+    ```
+
+5. [Optional] Build Docker Images
+
+    ```shell
+    # Build with Dockerfile (ps. Don't missing . (full-stop) in the end of command!)
+    docker build -t goldnoti .
+
+    # Run docker-compose command for testing container running
+    docker-compose up -d
     ```
 
 ## 😎 Author

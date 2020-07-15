@@ -1,0 +1,7 @@
+version: "3"
+services:
+  goldnoti:
+    container_name: goldnoti
+    image: goldnoti:latest
+    ports:
+      - 10999:10999
