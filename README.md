@@ -11,6 +11,10 @@ Check Gold Price Today :D made for Thai and made in Thailand
 - [x] [Testify v1.3.0](https://github.com/stretchr/testify)
 - [x] [Colly v2.1.0](https://github.com/gocolly/colly)
 
+## 📚 Tech Stack
+
+![./documents/tech-stack.png](./documents/tech-stack.png)
+
 ## 📋 Features
 
 - [x] API Check Price for Today
