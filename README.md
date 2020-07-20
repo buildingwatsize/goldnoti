@@ -28,6 +28,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.5
+
+- Added Color Decor by difference today status change
+
 v0.2.4
 
 - Edited Image Host

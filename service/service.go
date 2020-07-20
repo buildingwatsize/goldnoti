@@ -93,6 +93,12 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			return
 		}
 
+		colorCode := "#666666"
+		if todayPrice.StatusChange == "ทองขึ้น" {
+			colorCode = "#64a338"
+		} else if todayPrice.StatusChange == "ทองลง" {
+			colorCode = "	#e03b24"
+		}
 		flexContainer, err := linebot.UnmarshalFlexMessageJSON([]byte(fmt.Sprintf(`
 		{
 			"type": "bubble",
@@ -244,7 +250,7 @@ func HandleLINEEventMessage(event *linebot.Event) {
 										"size": "sm",
 										"align": "end",
 										"weight": "bold",
-										"color": "#666666",
+										"color": "%v",
 										"wrap": true
 									}
 								]
@@ -283,6 +289,7 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			humanize.FormatFloat("", todayPrice.OrnamentSell),
 			humanize.FormatFloat("", todayPrice.TodayChange),
 			todayPrice.StatusChange,
+			colorCode,
 			todayPrice.UpdatedDate,
 			todayPrice.UpdatedTime,
 		)))
