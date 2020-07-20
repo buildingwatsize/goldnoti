@@ -98,7 +98,7 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			"type": "bubble",
 			"hero": {
 				"type": "image",
-				"url": "https://i.postimg.cc/BZFSftJq/bullion-1744773-1280.jpg",
+				"url": "https://i.postimg.cc/3xxWh7Ln/bullion-1744773-1280.jpg",
 				"size": "full",
 				"aspectRatio": "20:13",
 				"aspectMode": "cover",
