@@ -4,10 +4,12 @@ import (
 	"errors"
 	"goldnoti/model"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
 	"github.com/gocolly/colly"
+	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 const (
@@ -16,6 +18,31 @@ const (
 	// GoldtradersTableElement : parent element for pricing zone
 	GoldtradersTableElement = "#rightCol > div.divgta.goldshopf > table > tbody"
 )
+
+var (
+	// Bot : For LINE Bot Client Configuration
+	Bot           *linebot.Client
+	channelSecret string
+	channelToken  string
+)
+
+// SetupLINEConfig : Setup Channel Secret and Channel Token for using in LINE Bot
+func SetupLINEConfig() {
+	channelSecret = os.Getenv("CHANNEL_SECRET")
+	channelToken = os.Getenv("CHANNEL_TOKEN")
+}
+
+// LINEBotInitialize : First Initialize LINE Bot Integration
+func LINEBotInitialize() {
+	var err error
+	Bot, err = linebot.New(
+		channelSecret,
+		channelToken,
+	)
+	if err != nil {
+		log.Panicln("LINE Bot Initialize Error:", err)
+	}
+}
 
 // ToFloat64 : String Converter for Float64
 func ToFloat64(stringVal string) float64 {

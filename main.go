@@ -2,6 +2,7 @@ package main
 
 import (
 	"goldnoti/api"
+	"goldnoti/repository"
 	"goldnoti/service"
 	"net/http"
 	"os"
@@ -13,8 +14,12 @@ func main() {
 	service.SetupConfig("./config")
 	service.SetupConfigParams()
 
+	repository.SetupLINEConfig()
+	repository.LINEBotInitialize()
+
 	http.HandleFunc("/api/health", api.Health)
 	http.HandleFunc("/api/today", api.GetTodayPrice)
+	http.HandleFunc("/api/today/line", api.GetTodayPriceForLINEBot)
 
 	port := os.Getenv("PORT")
 	if port == "" {

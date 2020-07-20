@@ -3,9 +3,12 @@ package api
 import (
 	"encoding/json"
 	"goldnoti/model"
+	"goldnoti/repository"
 	"goldnoti/service"
 	"log"
 	"net/http"
+
+	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 const (
@@ -29,12 +32,36 @@ func isPOST(r *http.Request) bool {
 
 // ResponseMethodNotAllowed : Response to requester in case 405: Method Not Allowed
 func ResponseMethodNotAllowed(w http.ResponseWriter) {
-	methodNotAllowed := "Method Not Allowed"
-	log.Println(methodNotAllowed)
+	responseMessage := "Method Not Allowed"
+	log.Println(responseMessage)
 	w.WriteHeader(http.StatusMethodNotAllowed)
 	json.NewEncoder(w).Encode(model.GoldPriceResponse{
 		ResponseData:      model.GoldPriceData{},
-		ResponseMessage:   methodNotAllowed,
+		ResponseMessage:   responseMessage,
+		ResponseTimestamp: service.GetTimestamp(),
+	})
+}
+
+// ResponseBadRequest : Response to requester in case 400: Bad Request
+func ResponseBadRequest(w http.ResponseWriter) {
+	responseMessage := "Bad Request"
+	log.Println(responseMessage)
+	w.WriteHeader(http.StatusBadRequest)
+	json.NewEncoder(w).Encode(model.GoldPriceResponse{
+		ResponseData:      model.GoldPriceData{},
+		ResponseMessage:   responseMessage,
+		ResponseTimestamp: service.GetTimestamp(),
+	})
+}
+
+// ResponseInternalServerError : Response to requester in case 500: Internal Server Error
+func ResponseInternalServerError(w http.ResponseWriter) {
+	responseMessage := "Internal Server Error"
+	log.Println(responseMessage)
+	w.WriteHeader(http.StatusInternalServerError)
+	json.NewEncoder(w).Encode(model.GoldPriceResponse{
+		ResponseData:      model.GoldPriceData{},
+		ResponseMessage:   responseMessage,
 		ResponseTimestamp: service.GetTimestamp(),
 	})
 }
@@ -50,4 +77,31 @@ func GetTodayPrice(w http.ResponseWriter, r *http.Request) {
 	todayPrice := service.GetTodayPrice()
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(todayPrice)
+}
+
+// GetTodayPriceForLINEBot : Get today gold price with webhook
+func GetTodayPriceForLINEBot(w http.ResponseWriter, r *http.Request) {
+	log.Println("------- API: GetTodayPriceForLINEBot -------")
+	defer r.Body.Close()
+	w.Header().Set(contentTypeKey, contentTypeValue)
+	if !isPOST(r) {
+		ResponseMethodNotAllowed(w)
+		return
+	}
+
+	events, err := repository.Bot.ParseRequest(r)
+	if err != nil {
+		if err == linebot.ErrInvalidSignature {
+			ResponseBadRequest(w)
+		} else {
+			ResponseInternalServerError(w)
+		}
+		return
+	}
+
+	for _, event := range events {
+		if event.Type == linebot.EventTypeMessage {
+			go service.HandleLINEEventMessage(event)
+		}
+	}
 }

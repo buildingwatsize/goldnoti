@@ -28,6 +28,11 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.0
+
+- [NEW] Supported New API Path, Get Gold Price Today for LINE Bot
+- Required as ENV Variable: `CHANNEL_SECRET` and `CHANNEL_TOKEN`
+
 v0.1.3
 
 - Make App Supported Heroku Port Dynamically on Deployed
