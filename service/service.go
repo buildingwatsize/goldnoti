@@ -93,175 +93,171 @@ func HandleLINEEventMessage(event *linebot.Event) {
 		}
 
 		flexContainer, err := linebot.UnmarshalFlexMessageJSON([]byte(fmt.Sprintf(`
-			{
-				"type": "flex",
-				"altText": "ราคาทองคำวันนี้",
-				"contents": {
-					"type": "bubble",
-					"body": {
+		{
+			"type": "bubble",
+			"body": {
+				"type": "box",
+				"layout": "vertical",
+				"spacing": "md",
+				"contents": [
+					{
+						"type": "text",
+						"text": "ราคาทองคำวันนี้",
+						"size": "xl",
+						"gravity": "center",
+						"weight": "bold",
+						"wrap": true
+					},
+					{
 						"type": "box",
 						"layout": "vertical",
-						"spacing": "md",
+						"spacing": "sm",
+						"margin": "lg",
 						"contents": [
 							{
-								"type": "text",
-								"text": "ราคาทองคำวันนี้",
-								"size": "xl",
-								"gravity": "center",
-								"weight": "bold",
-								"wrap": true
+								"type": "box",
+								"layout": "baseline",
+								"spacing": "sm",
+								"contents": [
+									{
+										"type": "text",
+										"text": "ทองคำแท่ง (ซื้อ)",
+										"flex": 4,
+										"size": "sm",
+										"color": "#AAAAAA"
+									},
+									{
+										"type": "text",
+										"text": "%v",
+										"size": "sm",
+										"align": "end",
+										"color": "#666666",
+										"wrap": true
+									}
+								]
+							},
+							{
+								"type": "box",
+								"layout": "baseline",
+								"spacing": "sm",
+								"contents": [
+									{
+										"type": "text",
+										"text": "ทองคำแท่ง (ขาย)",
+										"flex": 4,
+										"size": "sm",
+										"color": "#AAAAAA"
+									},
+									{
+										"type": "text",
+										"text": "%v",
+										"size": "sm",
+										"align": "end",
+										"color": "#666666",
+										"wrap": true
+									}
+								]
+							},
+							{
+								"type": "separator"
+							},
+							{
+								"type": "box",
+								"layout": "baseline",
+								"spacing": "sm",
+								"contents": [
+									{
+										"type": "text",
+										"text": "ทองรูปพรรณ (ซื้อ)",
+										"flex": 4,
+										"size": "sm",
+										"color": "#AAAAAA"
+									},
+									{
+										"type": "text",
+										"text": "%v",
+										"size": "sm",
+										"align": "end",
+										"color": "#666666",
+										"wrap": true
+									}
+								]
+							},
+							{
+								"type": "box",
+								"layout": "baseline",
+								"spacing": "sm",
+								"contents": [
+									{
+										"type": "text",
+										"text": "ทองรูปพรรณ (ขาย)",
+										"flex": 4,
+										"size": "sm",
+										"color": "#AAAAAA"
+									},
+									{
+										"type": "text",
+										"text": "%v",
+										"size": "sm",
+										"align": "end",
+										"color": "#666666",
+										"wrap": true
+									}
+								]
+							},
+							{
+								"type": "separator"
+							},
+							{
+								"type": "box",
+								"layout": "baseline",
+								"margin": "xxl",
+								"contents": [
+									{
+										"type": "text",
+										"text": "การเปลี่ยนแปลงวันนี้",
+										"flex": 4,
+										"size": "sm",
+										"color": "#AAAAAA"
+									},
+									{
+										"type": "text",
+										"text": "%v (%v)",
+										"size": "sm",
+										"align": "end",
+										"weight": "bold",
+										"color": "#666666",
+										"wrap": true
+									}
+								]
 							},
 							{
 								"type": "box",
 								"layout": "vertical",
-								"spacing": "sm",
-								"margin": "lg",
+								"margin": "xxl",
 								"contents": [
 									{
-										"type": "box",
-										"layout": "baseline",
-										"spacing": "sm",
-										"contents": [
-											{
-												"type": "text",
-												"text": "ทองคำแท่ง (ซื้อ)",
-												"flex": 4,
-												"size": "sm",
-												"color": "#AAAAAA"
-											},
-											{
-												"type": "text",
-												"text": "%v",
-												"size": "sm",
-												"align": "end",
-												"color": "#666666",
-												"wrap": true
-											}
-										]
+										"type": "text",
+										"text": "%v %v",
+										"size": "sm",
+										"align": "end"
 									},
 									{
-										"type": "box",
-										"layout": "baseline",
-										"spacing": "sm",
-										"contents": [
-											{
-												"type": "text",
-												"text": "ทองคำแท่ง (ขาย)",
-												"flex": 4,
-												"size": "sm",
-												"color": "#AAAAAA"
-											},
-											{
-												"type": "text",
-												"text": "%v",
-												"size": "sm",
-												"align": "end",
-												"color": "#666666",
-												"wrap": true
-											}
-										]
-									},
-									{
-										"type": "separator"
-									},
-									{
-										"type": "box",
-										"layout": "baseline",
-										"spacing": "sm",
-										"contents": [
-											{
-												"type": "text",
-												"text": "ทองรูปพรรณ (ซื้อ)",
-												"flex": 4,
-												"size": "sm",
-												"color": "#AAAAAA"
-											},
-											{
-												"type": "text",
-												"text": "%v",
-												"size": "sm",
-												"align": "end",
-												"color": "#666666",
-												"wrap": true
-											}
-										]
-									},
-									{
-										"type": "box",
-										"layout": "baseline",
-										"spacing": "sm",
-										"contents": [
-											{
-												"type": "text",
-												"text": "ทองรูปพรรณ (ขาย)",
-												"flex": 4,
-												"size": "sm",
-												"color": "#AAAAAA"
-											},
-											{
-												"type": "text",
-												"text": "%v",
-												"size": "sm",
-												"align": "end",
-												"color": "#666666",
-												"wrap": true
-											}
-										]
-									},
-									{
-										"type": "separator"
-									},
-									{
-										"type": "box",
-										"layout": "baseline",
-										"margin": "xxl",
-										"contents": [
-											{
-												"type": "text",
-												"text": "การเปลี่ยนแปลงวันนี้",
-												"flex": 4,
-												"size": "sm",
-												"color": "#AAAAAA"
-											},
-											{
-												"type": "text",
-												"text": "%v (%v)",
-												"size": "sm",
-												"align": "end",
-												"weight": "bold",
-												"color": "#666666",
-												"wrap": true
-											}
-										]
-									},
-									{
-										"type": "box",
-										"layout": "vertical",
-										"margin": "xxl",
-										"contents": [
-											{
-												"type": "text",
-												"text": "%v %v",
-												"size": "sm",
-												"align": "end"
-											},
-											{
-												"type": "text",
-												"text": "พัฒนาด้วย ❤️ จากทีมงาน Goldnoti",
-												"margin": "md",
-												"size": "xs",
-												"align": "end",
-												"color": "#AAAAAA",
-												"wrap": true
-											}
-										]
+										"type": "text",
+										"text": "พัฒนาด้วย ❤️ จากทีมงาน Goldnoti",
+										"margin": "md",
+										"size": "xs",
+										"align": "end",
+										"color": "#AAAAAA",
+										"wrap": true
 									}
 								]
 							}
 						]
 					}
-				}
+				]
 			}
+		}
 		`,
 			todayPrice.BarBuy,
 			todayPrice.BarSell,
@@ -273,7 +269,7 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			todayPrice.UpdatedTime,
 		)))
 		if err != nil {
-			log.Println("[ERROR]: Making Flex Message |", err)
+			log.Println("[ERROR]: Flex Message Builder |", err)
 			return
 		}
 		flexMessage := linebot.NewFlexMessage("ราคาทองคำวันนี้", flexContainer)

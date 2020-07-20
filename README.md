@@ -28,6 +28,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.1
+
+- Fixed Bug: Invalid container type (in `Flex Message Builder`)
+
 v0.2.0
 
 - [NEW] Supported New API Path, Get Gold Price Today for LINE Bot
