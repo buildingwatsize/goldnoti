@@ -28,6 +28,12 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.2
+
+- Added Image for Flex Message
+- Edited Flex Container Size
+- Edited Text Price with Zero Padding (Floating Point)
+
 v0.2.1
 
 - Fixed Bug: Invalid container type (in `Flex Message Builder`)
