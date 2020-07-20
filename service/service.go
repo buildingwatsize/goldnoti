@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/dustin/go-humanize"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/spf13/viper"
 )
@@ -276,11 +277,11 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			}
 		}
 		`,
-			fmt.Sprintf("%.2f", todayPrice.BarBuy),
-			fmt.Sprintf("%.2f", todayPrice.BarSell),
-			fmt.Sprintf("%.2f", todayPrice.OrnamentBuy),
-			fmt.Sprintf("%.2f", todayPrice.OrnamentSell),
-			fmt.Sprintf("%.2f", todayPrice.TodayChange),
+			humanize.CommafWithDigits(todayPrice.BarBuy, 2),
+			humanize.CommafWithDigits(todayPrice.BarSell, 2),
+			humanize.CommafWithDigits(todayPrice.OrnamentBuy, 2),
+			humanize.CommafWithDigits(todayPrice.OrnamentSell, 2),
+			humanize.CommafWithDigits(todayPrice.TodayChange, 2),
 			todayPrice.StatusChange,
 			todayPrice.UpdatedDate,
 			todayPrice.UpdatedTime,

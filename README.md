@@ -28,6 +28,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.3
+
+- Used [go-humanize](https://github.com/dustin/go-humanize) for Converting Price Variable
+
 v0.2.2
 
 - Added Image for Flex Message
