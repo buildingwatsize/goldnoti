@@ -28,6 +28,11 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.4
+
+- Edited Image Host
+- Edited Function Convert Price Number from `CommafWithDigits` to `FormatFloat`
+  
 v0.2.3
 
 - Used [go-humanize](https://github.com/dustin/go-humanize) for Converting Price Variable
