@@ -93,13 +93,32 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			return
 		}
 
-		colorCode := "#666666"
-		if todayPrice.StatusChange == "ทองขึ้น" {
-			colorCode = "#64a338"
-		} else if todayPrice.StatusChange == "ทองลง" {
-			colorCode = "#e03b24"
+		title := "ราคาทองคำวันนี้"
+		flexContainer, err := FlexContainerGenerator(todayPrice)
+		if err != nil {
+			title = "ระบบผิดพลาด"
+			log.Println("[ERROR]: Flex Message Builder |", err)
 		}
-		flexContainer, err := linebot.UnmarshalFlexMessageJSON([]byte(fmt.Sprintf(`
+
+		flexMessage := linebot.NewFlexMessage(title, flexContainer)
+
+		replyToken := event.ReplyToken
+		if _, err := repository.Bot.ReplyMessage(replyToken, flexMessage).Do(); err != nil {
+			log.Println("[ERROR]: Reply Message |", err)
+			return
+		}
+	}
+}
+
+// FlexContainerGenerator : Flex Message Container Generator, created by Flex Message with data model
+func FlexContainerGenerator(todayPrice model.GoldPriceData) (linebot.FlexContainer, error) {
+	colorCode := "#666666"
+	if todayPrice.StatusChange == "ทองขึ้น" {
+		colorCode = "#64a338"
+	} else if todayPrice.StatusChange == "ทองลง" {
+		colorCode = "#e03b24"
+	}
+	flexContainer, err := linebot.UnmarshalFlexMessageJSON([]byte(fmt.Sprintf(`
 		{
 			"type": "bubble",
 			"hero": {
@@ -283,26 +302,31 @@ func HandleLINEEventMessage(event *linebot.Event) {
 			}
 		}
 		`,
-			humanize.FormatFloat("", todayPrice.BarBuy),
-			humanize.FormatFloat("", todayPrice.BarSell),
-			humanize.FormatFloat("", todayPrice.OrnamentBuy),
-			humanize.FormatFloat("", todayPrice.OrnamentSell),
-			humanize.FormatFloat("", todayPrice.TodayChange),
-			todayPrice.StatusChange,
-			colorCode,
-			todayPrice.UpdatedDate,
-			todayPrice.UpdatedTime,
-		)))
-		if err != nil {
-			log.Println("[ERROR]: Flex Message Builder |", err)
-			return
-		}
-		flexMessage := linebot.NewFlexMessage("ราคาทองคำวันนี้", flexContainer)
-
-		replyToken := event.ReplyToken
-		if _, err := repository.Bot.ReplyMessage(replyToken, flexMessage).Do(); err != nil {
-			log.Println("[ERROR]: Reply Message |", err)
-			return
-		}
+		humanize.FormatFloat("", todayPrice.BarBuy),
+		humanize.FormatFloat("", todayPrice.BarSell),
+		humanize.FormatFloat("", todayPrice.OrnamentBuy),
+		humanize.FormatFloat("", todayPrice.OrnamentSell),
+		humanize.FormatFloat("", todayPrice.TodayChange),
+		todayPrice.StatusChange,
+		colorCode,
+		todayPrice.UpdatedDate,
+		todayPrice.UpdatedTime,
+	)))
+	if err != nil {
+		errFlexContainer, _ := linebot.UnmarshalFlexMessageJSON([]byte(`{
+				"type": "bubble",
+				"hero": {
+					"type": "image",
+					"url": "https://i.postimg.cc/ncPs3FC3/error-something-went-wrong.png",
+					"margin": "none",
+					"align": "center",
+					"gravity": "center",
+					"size": "full",
+					"aspectMode": "cover",
+					"backgroundColor": "#FFFFFF"
+				}
+			}`))
+		return errFlexContainer, err
 	}
+	return flexContainer, nil
 }

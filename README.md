@@ -28,6 +28,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.7
+
+- Added Error Flex Message, which response to user when unmarshalling to flex message error
+
 v0.2.6
 
 - Fixed Bug: Color Hex Value is wrong when response is "ทองลง"
