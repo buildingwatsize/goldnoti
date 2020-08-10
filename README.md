@@ -28,6 +28,10 @@ See more at [documents/README.md](documents/README.md)
 
 ## 🏷 Versions
 
+v0.2.6
+
+- Fixed Bug: Color Hex Value is wrong when response is "ทองลง"
+
 v0.2.5
 
 - Added Color Decor by difference today status change

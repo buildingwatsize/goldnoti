@@ -97,7 +97,7 @@ func HandleLINEEventMessage(event *linebot.Event) {
 		if todayPrice.StatusChange == "ทองขึ้น" {
 			colorCode = "#64a338"
 		} else if todayPrice.StatusChange == "ทองลง" {
-			colorCode = "	#e03b24"
+			colorCode = "#e03b24"
 		}
 		flexContainer, err := linebot.UnmarshalFlexMessageJSON([]byte(fmt.Sprintf(`
 		{
